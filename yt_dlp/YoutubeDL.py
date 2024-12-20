@@ -1362,7 +1362,7 @@ class YoutubeDL:
             if value is None:
                 value, fmt = default, 's'
             elif fmt[-1] == 'l':  # list
-                delim = '\n' if '#' in flags else ', '
+                delim = [', ','\n','\u0000',';'][('#' in flags) + 2*('+' in flags)]
                 value, fmt = delim.join(map(str, variadic(value, allowed_types=(str, bytes)))), str_fmt
             elif fmt[-1] == 'j':  # json
                 value, fmt = json.dumps(
